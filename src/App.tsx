@@ -1,10 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+
+  const getTestData = async () => {
+    try {
+      const data = await fetch('http://localhost:8000/')
+      const res = await data.text()
+      console.log(res)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    getTestData()
+  }, [])
 
   return (
     <>
