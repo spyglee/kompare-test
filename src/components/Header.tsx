@@ -1,0 +1,68 @@
+import {
+  Toolbar,
+  Checkbox,
+  FormControlLabel,
+  Typography
+} from '@mui/material'
+import { useContekst } from '../context'
+
+
+const Header = () => {
+  const tollbar = {
+    p: 2,
+    display: 'flex',
+    flexDirection: 'row', 
+    flexWrap: 'wrap',
+    backgroundColor: 'lightgrey',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  }
+
+  const context = useContekst()
+
+  return (
+    <Toolbar component='div' sx={tollbar}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={context.commertialDiscount}
+              onChange={(event, checked) => context.setCommertialDiscount(checked)}
+            />
+          }
+          label='Commertial discount'
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={context.agentsDiscount}
+              onChange={(event, checked) => context.setAgentsDiscount(checked)}
+            />
+          }
+          label='Agents discount'
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={context.summerDiscount}
+              onChange={(event, checked) => context.setSummerDiscount(checked)}
+            />
+          }
+          label='Summer discount'
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked
+              disabled
+            />
+          }
+          label='Strong car surcharge'
+        />
+        <Typography>
+          Total price: 42
+        </Typography>
+    </Toolbar>
+  )
+}
+
+export default Header

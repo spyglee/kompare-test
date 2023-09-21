@@ -7,7 +7,7 @@ import express, {
     Response
   } from 'express'
 
-dotenv.config();
+dotenv.config()
 
 const app: Express = express()
 const port = process.env.PORT
@@ -16,16 +16,17 @@ mongoose.connect(process.env.MONGO || '')
 const db = mongoose.connection
 
 db.on('error', (error) => {
-  console.log(error)
+  console.error(error)
 })
-
 db.once('open', () => console.log('Connected to database'))
 
 app.use(cors())
+app.use(express.json())
 
 app.get('/', (req: Request, res: Response) => {
   console.log(req)
-  res.send('Express + TypeScript Server')
+  const response = JSON.stringify({ message: 'Hi from server!' })
+  res.end(response)
 })
 
 app.listen(port, () => {
