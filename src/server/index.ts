@@ -1,11 +1,15 @@
 import cors from 'cors'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
-import express, {
+import express,
+  {
     Express,
     Request,
     Response
-  } from 'express'
+  }
+from 'express'
+
+import calculating from './controllers/calculatingControllers.ts'
 
 dotenv.config()
 
@@ -23,10 +27,8 @@ db.once('open', () => console.log('Connected to database'))
 app.use(cors())
 app.use(express.json())
 
-app.get('/', (req: Request, res: Response) => {
-  console.log(req)
-  const response = JSON.stringify({ message: 'Hi from server!' })
-  res.end(response)
+app.post('/calculate', (req: Request, res: Response) => {
+  return calculating(req, res)
 })
 
 app.listen(port, () => {

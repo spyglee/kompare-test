@@ -6,70 +6,78 @@ import {
   useState,
 } from 'react'
 
+type dispatchBoolean = Dispatch<React.SetStateAction<boolean>>
+type dispatchString = Dispatch<React.SetStateAction<string>>
+type dispatchDate = Dispatch<React.SetStateAction<Date | string | null>>
+type dispatchStringOrUndefined = Dispatch<React.SetStateAction<string | undefined>>
+type dispatchStringOrNumber = Dispatch<React.SetStateAction<string | number>>
+
+const emptyFunc = () => {}
+
 type ContextType = {
   ao: boolean,
-  setAo: Dispatch<React.SetStateAction<boolean>>,
+  setAo: dispatchBoolean,
   agentsDiscount: boolean,
-  setAgentsDiscount: Dispatch<React.SetStateAction<boolean>>,
+  setAgentsDiscount: dispatchBoolean,
   birthDate: Date | string | null,
-  setBirthDate: Dispatch<React.SetStateAction<Date | string | null>>,
+  setBirthDate: dispatchDate,
   bonusProtection: boolean,
-  setBonusProtection: Dispatch<React.SetStateAction<boolean>>,
+  setBonusProtection: dispatchBoolean,
   city: string,
-  setCity: Dispatch<React.SetStateAction<string>>
+  setCity: dispatchString
   commertialDiscount: boolean,
-  setCommertialDiscount: Dispatch<React.SetStateAction<boolean>>,
+  setCommertialDiscount: dispatchBoolean,
   error: string | undefined,
-  setError: Dispatch<React.SetStateAction<string | undefined>>,
+  setError: dispatchStringOrUndefined,
   glassCoverage: boolean,
-  setGlassCoverage: Dispatch<React.SetStateAction<boolean>>,
+  setGlassCoverage: dispatchBoolean,
   name: string,
-  setName: Dispatch<React.SetStateAction<string>>,
+  setName: dispatchString,
   loading: boolean,
-  setLoading: Dispatch<React.SetStateAction<boolean>>,
+  setLoading: dispatchBoolean,
   priceMatch: number | string,
-  setPriceMatch: Dispatch<React.SetStateAction<number | string>>,
+  setPriceMatch: dispatchStringOrNumber,
   success: string | undefined,
-  setSuccess: Dispatch<React.SetStateAction<string | undefined>>,
+  setSuccess: dispatchStringOrUndefined,
   summerDiscount: boolean,
-  setSummerDiscount: Dispatch<React.SetStateAction<boolean>>,
+  setSummerDiscount: dispatchBoolean,
   vehiclePower: number | string,
-  setVehiclePower: Dispatch<React.SetStateAction<number | string>>,
+  setVehiclePower: dispatchStringOrNumber,
   voucher: number | string,
-  setVoucher: Dispatch<React.SetStateAction<number | string>>,
+  setVoucher: dispatchStringOrNumber,
 }
 
 const Context = createContext<ContextType>({
   ao: false,
-  setAo: () => {},
+  setAo: emptyFunc,
   agentsDiscount: false,
-  setAgentsDiscount: () => {},
+  setAgentsDiscount: emptyFunc,
   birthDate: '',
-  setBirthDate: () => {},
+  setBirthDate: emptyFunc,
   bonusProtection: false,
-  setBonusProtection: () => {},
+  setBonusProtection: emptyFunc,
   city: '',
-  setCity: () => {},
+  setCity: emptyFunc,
   commertialDiscount: false,
-  setCommertialDiscount: () => {},
+  setCommertialDiscount: emptyFunc,
   error: '',
-  setError: () => {},
+  setError: emptyFunc,
   glassCoverage: false,
-  setGlassCoverage: () => {},
+  setGlassCoverage: emptyFunc,
   name: '',
-  setName: () => {},
+  setName: emptyFunc,
   loading: false,
-  setLoading: () => {},
+  setLoading: emptyFunc,
   priceMatch: '',
-  setPriceMatch: () => {},
+  setPriceMatch: emptyFunc,
   success: undefined,
-  setSuccess: () => {},
+  setSuccess: emptyFunc,
   summerDiscount: false,
-  setSummerDiscount: () => {},
+  setSummerDiscount: emptyFunc,
   vehiclePower: '',
-  setVehiclePower: () => {},
+  setVehiclePower: emptyFunc,
   voucher: '',
-  setVoucher: () => {},
+  setVoucher: emptyFunc,
 })
 
 export const useContekst = () => useContext( Context )
@@ -80,7 +88,7 @@ const ContextProvider: React.FC<PropsWithChildren> = ( { children } ) => {
   const [success, setSuccess] = useState<string | undefined>('')
   const [name, setName] = useState<string>('')
   const [birthDate, setBirthDate] = useState<string | Date | null>(new Date(2000, 0, 1))
-  const [city, setCity] = useState<string>('');
+  const [city, setCity] = useState<string>('Zagreb');
   const [vehiclePower, setVehiclePower ] = useState<number | string>('');
   const [voucher, setVoucher] = useState<number | string>('');
   const [priceMatch, setPriceMatch] = useState<number | string>('');

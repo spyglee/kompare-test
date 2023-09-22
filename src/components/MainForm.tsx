@@ -3,10 +3,12 @@ import { Save } from '@mui/icons-material';
 import {
   useCallback,
   useEffect,
+  useState,
 } from 'react';
 import {
   Button,
   Card,
+  MenuItem,
   TextField,
   Typography,
 } from '@mui/material';
@@ -37,6 +39,7 @@ const priceContainer = {
 const MainForm = () => {
   const fetch = useFetch()
   const context = useContekst()
+  const [formIsValid, setFormIsValid] = useState(true);
 
   const getTestData = useCallback(async () => {
     const data = await fetch('http://localhost:8000/', 'GET', undefined, true)
@@ -86,6 +89,15 @@ const MainForm = () => {
     context.setPriceMatch(value)
   };
 
+  const validateAndSave = () => {
+    console.log(context.name)
+    if (!context.name || !context.birthDate || !context.city || !context.vehiclePower) {
+      context.setError('Looks like you have forgotten filling some fields...')
+      return setFormIsValid(false)
+    }
+    setFormIsValid(true)
+  }
+
   return (
     <Card elevation={5} sx={cardStyle}>
       <Typography component={'h1'} sx={headerStyle}>
@@ -93,6 +105,7 @@ const MainForm = () => {
       </Typography>
       <TextField
         autoFocus
+        error={!formIsValid && !context.name}
         label='Name'
         onChange={onNameChange}
         value={context.name}
@@ -104,12 +117,25 @@ const MainForm = () => {
         value={context.birthDate}
       />
       <TextField
-        label='City'
+        error={!formIsValid && !context.city}
+        label ='City'
         onChange={onCityChange}
+        select
         value={context.city}
         variant='outlined'
-      />
+      >
+        <MenuItem value='Zagreb'>
+          Zagreb
+        </MenuItem>
+        <MenuItem value='Rijeka'>
+          Rijeka
+        </MenuItem>
+        <MenuItem value='Osijek'>
+          Osijek
+        </MenuItem>
+      </TextField>
       <TextField
+        error={!formIsValid && !context.vehiclePower}
         label='Vehicle power'
         onChange={onVehiclePowerChange}
         type='number'
@@ -142,7 +168,7 @@ const MainForm = () => {
           EUR
         </Typography>
       </div>
-      <Button>
+      <Button onClick={validateAndSave}>
         <Save /> Save
       </Button>
     </Card>
