@@ -2,19 +2,19 @@ import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import en from 'date-fns/esm/locale/en-GB';
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import en from 'date-fns/esm/locale/en-GB'
 import { Paper } from '@mui/material'
 import { useMemo } from 'react'
 
 import ContextProvider from './context/index'
 import Error from './components/common/Error'
-import Header from './components/Header';
+import Header from './components/Header'
 import Success from './components/common/Success'
 import MainForm from './components/MainForm'
-import Sidebar from './components/Sidebar';
-import Result from './components/Result';
+import Sidebar from './components/Sidebar'
+import Result from './components/Result'
 
 function App() {
   const paperStyle = useMemo(() => ({

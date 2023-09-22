@@ -14,20 +14,20 @@ type bodyType = {
   strongCarSurcharge: boolean,
   bonusProtection: boolean,
   ao: boolean,
-  glassCoverage: boolean
+  glassCoverage: boolean,
 }
 
 type calculationsType = {
-  agentsDiscountPrice: number
-  aoPrice: number
-  basePrice: number
-  bonusProtectionPrice: number
-  carSurchargePrice: number
-  commertialDiscountPrice: number
-  glassCoveragePrice: number
-  totalPrice: number
-  vipDiscountPrice: number
-  voucherPrice: number
+  agentsDiscountPrice: number,
+  aoPrice: number,
+  basePrice: number,
+  bonusProtectionPrice: number,
+  carSurchargePrice: number,
+  commertialDiscountPrice: number,
+  glassCoveragePrice: number,
+  totalPrice: number,
+  vipDiscountPrice: number,
+  voucherPrice: number,
 }
 
 const formulateBasePrice = (city: 'Zagreb' | 'Rijeka' | 'Osijek', birthDate: string): number => {

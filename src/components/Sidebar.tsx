@@ -3,9 +3,9 @@ import {
   FormControlLabel,
   Toolbar,
   Typography,
-} from '@mui/material';
+} from '@mui/material'
 
-import { headerStyle } from './common/Styles';
+import { headerStyle } from './common/Styles'
 import { useContekst } from '../context'
 
 const Sidebar = () => {
@@ -45,6 +45,6 @@ const Sidebar = () => {
       />
     </Toolbar>
   )
-};
+}
 
-export default Sidebar;
+export default Sidebar

@@ -59,7 +59,7 @@ const Header = () => {
           label='Strong car surcharge'
         />
         <Typography>
-          Total price: 42
+          {`Total price: ${context.calculations.totalPrice} EUR`}
         </Typography>
     </Toolbar>
   )

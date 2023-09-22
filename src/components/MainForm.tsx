@@ -1,21 +1,22 @@
 import { DatePicker } from '@mui/x-date-pickers'
-import { Save } from '@mui/icons-material';
+import { Save } from '@mui/icons-material'
 import {
   useCallback,
   useEffect,
+  useMemo,
   useState,
-} from 'react';
+} from 'react'
 import {
   Button,
   Card,
   MenuItem,
   TextField,
   Typography,
-} from '@mui/material';
+} from '@mui/material'
 
-import useFetch from '../hooks/useFecth';
-import { headerStyle } from './common/Styles';
-import { useContekst } from '../context';
+import useFetch from '../hooks/useFecth'
+import { headerStyle } from './common/Styles'
+import { useContekst } from '../context'
 
 const cardStyle = {
   mt: 2,
@@ -39,32 +40,23 @@ const priceContainer = {
 const MainForm = () => {
   const fetch = useFetch()
   const context = useContekst()
-  const [formIsValid, setFormIsValid] = useState(true);
-
-  const getTestData = useCallback(async () => {
-    const data = await fetch('http://localhost:8000/', 'GET', undefined, true)
-    context.setSuccess(data?.data?.message)
-  }, [context, fetch])
-
-  useEffect(() => {
-    getTestData()
-  }, [])
+  const [formIsValid, setFormIsValid] = useState(true)
 
   useEffect(() => {
       document.querySelector("input[type='number']")
         ?.addEventListener('keypress', event => {
           if (event?.which === 8) {
-            return;
+            return
           }
           if (event?.which < 48 || event?.which > 57) {
-            event.preventDefault();
+            event.preventDefault()
           }
         })
   }, [])
 
   const onNameChange = (event: eventType) => {
     context.setName(event.target.value)
-  };
+  }
 
   const onBirthDateChange = (value: string | Date | null) => {
     context.setBirthDate(value)
@@ -72,31 +64,93 @@ const MainForm = () => {
 
   const onCityChange = (event: eventType) => {
     context.setCity(event.target.value)
-  };
+  }
 
   const onVehiclePowerChange = (event: eventType) => {
     const value  = event.target.value.replace('/^[a-z\b]+$/', '')
     context.setVehiclePower(value)
-  };
+  }
 
   const onVoucherChange = (event: eventType) => {
     const value  = event.target.value.replace('/^[a-z\b]+$/', '')
     context.setVoucher(value)
-  };
+  }
 
   const onPriceMatchChange = (event: eventType) => {
     const value  = event.target.value.replace('/^[a-z\b]+$/', '')
     context.setPriceMatch(value)
-  };
+  }
 
-  const validateAndSave = () => {
-    console.log(context.name)
-    if (!context.name || !context.birthDate || !context.city || !context.vehiclePower) {
+  const formulateBody = useCallback(() => {
+    return {
+      name: context.name,
+      birthDate: context.birthDate,
+      city: context.city,
+      vehiclePower: context.vehiclePower,
+      voucher: context.voucher || 0,
+      priceMatch: context.priceMatch || 0,
+      commertialDiscount: context.commertialDiscount,
+      agentsDiscount: context.agentsDiscount,
+      summerDiscount: context.summerDiscount,
+      strongCarSurcharge: true,
+      bonusProtection: context.bonusProtection,
+      ao: context.ao,
+      glassCoverage: context.glassCoverage
+    }
+  }, [
+    context.agentsDiscount,
+    context.ao,
+    context.birthDate,
+    context.bonusProtection,
+    context.city,
+    context.commertialDiscount,
+    context.glassCoverage,
+    context.name,
+    context.priceMatch,
+    context.summerDiscount,
+    context.vehiclePower,
+    context.voucher,
+  ])
+
+  const getCalculations = useCallback(async() => {
+    try {
+      const request = await fetch('http://localhost:8000/calculate', 'POST', formulateBody(), true)
+      if (request.status === 'success') {
+        context.setCalculations(request.data)
+      } else {
+        context.setError(request.message)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }, [context, fetch, formulateBody])
+
+  const isValid = useMemo(() => (
+    context.name && context.birthDate && context.city && context.vehiclePower),
+    [context.birthDate, context.city, context.name, context.vehiclePower]
+  )
+
+  const validateAndSave = useCallback(() => {
+    if (!isValid) {
       context.setError('Looks like you have forgotten filling some fields...')
       return setFormIsValid(false)
     }
     setFormIsValid(true)
-  }
+    getCalculations()
+  }, [context, getCalculations, isValid])
+
+  useEffect(() => {
+    if (isValid) {
+      validateAndSave()
+    }
+  }, [
+    context.agentsDiscount,
+    context.ao,
+    context.bonusProtection,
+    context.commertialDiscount,
+    context.glassCoverage,
+    context.summerDiscount,
+  ])
 
   return (
     <Card elevation={5} sx={cardStyle}>
@@ -173,6 +227,6 @@ const MainForm = () => {
       </Button>
     </Card>
   )
-};
+}
 
-export default MainForm;
+export default MainForm
