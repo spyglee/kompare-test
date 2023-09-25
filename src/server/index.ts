@@ -10,6 +10,7 @@ import express,
 from 'express'
 
 import calculating from './controllers/calculatingControllers.ts'
+import getLogs from './controllers/logsControllers.ts'
 
 dotenv.config()
 
@@ -29,6 +30,10 @@ app.use(express.json())
 
 app.post('/calculate', (req: Request, res: Response) => {
   return calculating(req, res)
+})
+
+app.get('/logs', (_: Request, res: Response) => {
+  return getLogs(res)
 })
 
 app.listen(port, () => {

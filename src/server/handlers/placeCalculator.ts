@@ -1,5 +1,5 @@
 import getAge from '../helpers/getAge.ts'
-import roundPercisely from './roundPercisely.ts'
+import roundPercisely from '../helpers/roundPercisely.ts'
 
 type bodyType = {
   name: string,
@@ -135,10 +135,10 @@ const getNewBasePrice = (calculations: calculationsType, body: bodyType): number
   let currentCalculations = calculations
   let currentTotalPrice = calculations.totalPrice
 
-  const maxIterations = 1000
+  const maxIterations = 10000
   let iterations = 0
 
-  const tolerance = 0.01
+  const tolerance = 0.001
 
   while (Math.abs(currentTotalPrice - body.priceMatch) > tolerance && iterations < maxIterations) {
     const priceDifference = body.priceMatch - currentTotalPrice

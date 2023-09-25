@@ -1,11 +1,11 @@
-#How to start
+# How to start
 
 * make sure that you are using node 18.18.0 
 * clone the repository https://github.com/bahrov/kompare-test.git
 * run npm install 🚚 🚚 🚚
 * in MongoDB Compas make sure that you are using port 27017 otherwise change it in .env
 * create a new data base named kompare-test and collection named calculations
-* when everithing is installed open 2 terminals and run npm run dev to launch client it will show something like this:
+* when everithing is installed open 2 terminals and run npm run dev in one termonal to launch client it will show something like this:
   VITE v4.4.9  ready in 785 ms
 
   ➜  Local:   http://127.0.0.1:5173/

@@ -1,15 +1,22 @@
+import { useNavigate } from 'react-router-dom'
 import {
+  Button,
   Checkbox,
   FormControlLabel,
   Toolbar,
   Typography,
 } from '@mui/material'
 
-import { headerStyle } from './common/Styles'
-import { useContekst } from '../context'
+import { headerStyle } from '../common/Styles'
+import { useContekst } from '../../context'
 
 const Sidebar = () => {
   const context = useContekst()
+  const navigate = useNavigate()
+
+  const seeLogs = () => {
+    navigate('/logs')
+  }
 
   return (
     <Toolbar sx={{ backgroundColor: 'lightgrey', flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -43,6 +50,9 @@ const Sidebar = () => {
         }
         label='Glass coverage'
       />
+      <Button sx={{ mt: 'auto', ml: 'auto', mr: 'auto' }} onClick={seeLogs}>
+        See logs
+      </Button>
     </Toolbar>
   )
 }

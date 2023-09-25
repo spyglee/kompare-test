@@ -14,9 +14,9 @@ import {
   Typography,
 } from '@mui/material'
 
-import useFetch from '../hooks/useFecth'
-import { headerStyle } from './common/Styles'
-import { useContekst } from '../context'
+import useFetch from '../../hooks/useFecth'
+import { headerStyle } from '../common/Styles'
+import { useContekst } from '../../context'
 
 const cardStyle = {
   mt: 2,
@@ -81,10 +81,17 @@ const MainForm = () => {
     context.setPriceMatch(value)
   }
 
+  const makeServerDate = (date: Date | null | string): string => {
+    if (date && typeof date !== 'string') {
+      return `${date.getFullYear()}-${+date.getMonth() + 1}-${date.getDate()}`
+    }
+    return ''
+  }
+
   const formulateBody = useCallback(() => {
     return {
       name: context.name,
-      birthDate: context.birthDate,
+      birthDate: makeServerDate(context.birthDate),
       city: context.city,
       vehiclePower: context.vehiclePower,
       voucher: context.voucher || 0,

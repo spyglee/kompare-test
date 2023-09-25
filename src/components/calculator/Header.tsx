@@ -4,7 +4,7 @@ import {
   FormControlLabel,
   Typography
 } from '@mui/material'
-import { useContekst } from '../context'
+import { useContekst } from '../../context'
 
 
 const Header = () => {

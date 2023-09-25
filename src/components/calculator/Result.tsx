@@ -1,6 +1,6 @@
 import { Card, Typography } from '@mui/material'
-import { useContekst } from '../context'
-import { baseMarginRight, boldText } from './common/Styles'
+import { useContekst } from '../../context'
+import { baseMarginRight, boldText } from '../common/Styles'
 
 const Result = () => {
   const context = useContekst()
