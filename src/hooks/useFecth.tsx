@@ -5,9 +5,6 @@ const useFetch = () => {
 
   const customeFetch = async ( url: string, method: string, body: object | undefined, usePreloader = false ) => {
     try {
-      if ( usePreloader ) {
-        context.setLoading( true )
-      }
       const rawData = await fetch( url, {
         body: body ? JSON.stringify( body ) : null,
         method,
@@ -37,10 +34,6 @@ const useFetch = () => {
         }
       context.setError(message)
       return { status: 'error', message }
-    } finally {
-      if ( usePreloader ) {
-        context.setLoading( false )
-      }
     }
   }
 

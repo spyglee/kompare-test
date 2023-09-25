@@ -87,8 +87,6 @@ type ContextType = {
   setGlassCoverage: dispatchBoolean,
   name: string,
   setName: dispatchString,
-  loading: boolean,
-  setLoading: dispatchBoolean,
   priceMatch: number | string,
   setPriceMatch: dispatchStringOrNumber,
   success: string | undefined,
@@ -122,8 +120,6 @@ const Context = createContext<ContextType>({
   setGlassCoverage: emptyFunc,
   name: '',
   setName: emptyFunc,
-  loading: false,
-  setLoading: emptyFunc,
   priceMatch: '',
   setPriceMatch: emptyFunc,
   success: undefined,
@@ -140,7 +136,6 @@ export const useContekst = () => useContext( Context )
 
 const ContextProvider: React.FC<PropsWithChildren> = ( { children } ) => {
   const [error, setError] = useState<string | undefined>('')
-  const [loading, setLoading] = useState<boolean>(false)
   const [success, setSuccess] = useState<string | undefined>('')
   const [name, setName] = useState<string>('')
   const [birthDate, setBirthDate] = useState<string | Date | null>(new Date(2000, 0, 1))
@@ -175,8 +170,6 @@ const ContextProvider: React.FC<PropsWithChildren> = ( { children } ) => {
     setError,
     glassCoverage,
     setGlassCoverage,
-    loading,
-    setLoading,
     name,
     setName,
     priceMatch,
