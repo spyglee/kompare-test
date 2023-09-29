@@ -30,6 +30,32 @@ type calculationsType = {
   voucherPrice: number,
 }
 
+type returnType = {
+  name: string,
+  birthDate: string,
+  city: string,
+  vehiclePower: number,
+  voucher: number,
+  priceMatch: number,
+  commertialDiscount: boolean,
+  agentsDiscount: boolean,
+  summerDiscount: boolean,
+  strongCarSurcharge: boolean,
+  bonusProtection: boolean,
+  ao: boolean,
+  glassCoverage: boolean,
+  agentsDiscountPrice: number,
+  aoPrice: number,
+  basePrice: number,
+  bonusProtectionPrice: number,
+  carSurchargePrice: number,
+  commertialDiscountPrice: number,
+  glassCoveragePrice: number,
+  totalPrice: number,
+  vipDiscountPrice: number,
+  voucherPrice: number,
+}
+
 const formulateBasePrice = (city: 'Zagreb' | 'Rijeka' | 'Osijek', birthDate: string): number => {
   let basePrice = 0
   if (city === 'Zagreb') {
@@ -158,7 +184,7 @@ const adjustPriceToMatch = (calculations: calculationsType, body: bodyType): cal
   return formulateCalculations(body, newBasePrice)
 }
 
-const priceCalculator = (body: bodyType): object => {
+const priceCalculator = (body: bodyType): returnType => {
   const basePrice = formulateBasePrice(body.city, body.birthDate)
   let calculations = formulateCalculations(body, basePrice)
 
