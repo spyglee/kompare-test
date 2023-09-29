@@ -3,7 +3,7 @@ import { useContekst } from '../context/index'
 const useFetch = () => {
   const context = useContekst()
 
-  const customeFetch = async ( url: string, method: string, body: object | undefined, usePreloader = false ) => {
+  const customeFetch = async ( url: string, method: string, body: object | undefined) => {
     try {
       const rawData = await fetch( url, {
         body: body ? JSON.stringify( body ) : null,

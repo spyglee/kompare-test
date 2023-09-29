@@ -26,7 +26,7 @@ const Header = () => {
           control={
             <Checkbox
               checked={context.commertialDiscount}
-              onChange={(event, checked) => context.setCommertialDiscount(checked)}
+              onChange={(_, checked) => context.setCommertialDiscount(checked)}
             />
           }
           label='Commertial discount'
@@ -35,7 +35,7 @@ const Header = () => {
           control={
             <Checkbox
               checked={context.agentsDiscount}
-              onChange={(event, checked) => context.setAgentsDiscount(checked)}
+              onChange={(_, checked) => context.setAgentsDiscount(checked)}
             />
           }
           label='Agents discount'
@@ -44,7 +44,7 @@ const Header = () => {
           control={
             <Checkbox
               checked={context.summerDiscount}
-              onChange={(event, checked) => context.setSummerDiscount(checked)}
+              onChange={(_, checked) => context.setSummerDiscount(checked)}
             />
           }
           label='Summer discount'

@@ -88,7 +88,7 @@ const Logs = () => {
 
   const getLogs = useCallback(async() => {
     setData([dummyLog])
-    const data = await fetch('http://localhost:8000/logs', 'GET', undefined, true)
+    const data = await fetch('http://localhost:8000/logs', 'GET', undefined)
     if (data.status === 'success') {
       setData(data.data)
     } else {

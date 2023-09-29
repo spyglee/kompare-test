@@ -27,7 +27,7 @@ const Sidebar = () => {
         control={
           <Checkbox
             checked={context.bonusProtection}
-            onChange={(event, checked) => context.setBonusProtection(checked)}
+            onChange={(_, checked) => context.setBonusProtection(checked)}
           />
         }
         label='Bonus protection'
@@ -36,7 +36,7 @@ const Sidebar = () => {
         control={
           <Checkbox
             checked={context.ao}
-            onChange={(event, checked) => context.setAo(checked)}
+            onChange={(_, checked) => context.setAo(checked)}
           />
         }
         label='AO +'
@@ -45,7 +45,7 @@ const Sidebar = () => {
         control={
           <Checkbox
             checked={context.glassCoverage}
-            onChange={(event, checked) => context.setGlassCoverage(checked)}
+            onChange={(_, checked) => context.setGlassCoverage(checked)}
           />
         }
         label='Glass coverage'

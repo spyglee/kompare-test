@@ -42,18 +42,6 @@ const MainForm = () => {
   const context = useContekst()
   const [formIsValid, setFormIsValid] = useState(true)
 
-  useEffect(() => {
-      document.querySelector("input[type='number']")
-        ?.addEventListener('keypress', event => {
-          if (event?.which === 8) {
-            return
-          }
-          if (event?.which < 48 || event?.which > 57) {
-            event.preventDefault()
-          }
-        })
-  }, [])
-
   const onNameChange = (event: eventType) => {
     context.setName(event.target.value)
   }
@@ -121,7 +109,7 @@ const MainForm = () => {
 
   const getCalculations = useCallback(async() => {
     try {
-      const request = await fetch('http://localhost:8000/calculate', 'POST', formulateBody(), true)
+      const request = await fetch('http://localhost:8000/calculate', 'POST', formulateBody())
       if (request.status === 'success') {
         context.setCalculations(request.data)
       } else {
